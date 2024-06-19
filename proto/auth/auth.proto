@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "arup.auth.v1;authv1";
+
+service Auth {
+  rpc Login (LoginRequest) returns (LoginResponse);
+  rpc SignUp(SignUpRequest) returns (SignUpResponse);
+}
+
+message AuthCommon {
+  string email = 1;
+  string password = 2;
+}
+
+message SignUpRequest {
+  AuthCommon auth_common = 1;
+  optional string username = 3;
+}
+message SignUpResponse {
+  string token = 1;
+}
+
+message LoginRequest {
+  AuthCommon auth_common = 1;
+  int64 service_id = 2;
+}
+message LoginResponse {
+  string token = 1;
+}
